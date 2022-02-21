@@ -164,24 +164,47 @@ document
   .addEventListener("click", poll.registerNewAnswer.bind(poll));
 // poll.registerNewAnswer();
 
-// learning closures 
-const bookings = function() {
+// learning closures
+const bookings = function () {
   let passengerBooking = 0;
-  return function() {
-    passengerBooking++ ;
+  return function () {
+    passengerBooking++;
     console.log(`let passenger booking ${passengerBooking}`);
-  }
-}
-const establishClosures  = bookings()
+  };
+};
+const establishClosures = bookings();
 establishClosures();
 establishClosures();
 // console.dir(establishClosures)
 
+(function () {
+  const header = document.querySelector("h1");
+  header.style.color = "red";
+  document.querySelector("body").addEventListener("click", function () {
+    header.style.color = "blue";
+  });
+})();
 
-(function() {
-  const header = document.querySelector('h1');
-  header.style.color = 'red'; 
-  document.querySelector('body').addEventListener('click' , function(){
-    header.style.color = 'blue'
-  })
-}())
+// Array methods
+//  slice method : it doesnt mutate / change , the end isn't included ,
+// returns selected elements in an array as a new array
+const namesOfGirls = ['chizoba', 'grace','chioma','kamso'];
+console.log(namesOfGirls.slice(1,3));
+
+// splice changes the array by removing or adding 
+const nameOfBoys = ['obi','igwe','Francis'];
+console.log(nameOfBoys.splice(1,3));
+
+// reverse reverses an array
+
+const nameOfpeople = ['obi','igwe','Francis'];
+console.log(nameOfpeople.reverse());
+
+
+
+
+
+
+
+
+
