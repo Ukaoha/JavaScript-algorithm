@@ -188,23 +188,48 @@ establishClosures();
 // Array methods
 //  slice method : it doesnt mutate / change , the end isn't included ,
 // returns selected elements in an array as a new array
-const namesOfGirls = ['chizoba', 'grace','chioma','kamso'];
-console.log(namesOfGirls.slice(1,3));
+const namesOfGirls = ["chizoba", "grace", "chioma", "kamso"];
+console.log(namesOfGirls.slice(1, 3));
 
-// splice changes the array by removing or adding 
-const nameOfBoys = ['obi','igwe','Francis'];
-console.log(nameOfBoys.splice(1,3));
+// splice changes the array by removing or adding
+const nameOfBoys = ["obi", "igwe", "Francis"];
+console.log(nameOfBoys.splice(1, 3));
 
 // reverse reverses an array
 
-const nameOfpeople = ['obi','igwe','Francis'];
+const nameOfpeople = ["obi", "igwe", "Francis"];
 console.log(nameOfpeople.reverse());
 
+// Looping over arrays
+// for loop
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+for (let i = 0; i < movements.length; i++) console.log(movements[i]);
 
+// for of
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`you deposited money ${i + 1}: movement${movement}`);
+  } else {
+    console.log(`you withdrawl money ${i + 1}: movement${Math.abs(movement)}`);
+  }
+}
 
+// forEach
+movements.forEach(function(movement,i,ary) {
+  if(movement > 0 ) {
+    console.log(`you moved${i++} : ${Math.abs(movement)}`);
+  } else {
+    console.log(`do not move${i++} : ${Math.abs(movement)}`);
+  }
+});
+// forEach on maps
+const country = new Map ([
+  ['Nigeria', 'naira'],
+  ['USA','Dollars' ],
+  ['British' , 'pounds']
+]);
+country.forEach(function(value,key,map){
+  console.log(`${key} ${value}`);
+}) 
 
-
-
-
-
-
+// forEach on sets
