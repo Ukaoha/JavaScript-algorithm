@@ -215,29 +215,35 @@ for (const [i, movement] of movements.entries()) {
 }
 
 // forEach
-movements.forEach(function(movement,i,ary) {
-  if(movement > 0 ) {
+movements.forEach(function (movement, i, ary) {
+  if (movement > 0) {
     console.log(`you moved${i++} : ${Math.abs(movement)}`);
   } else {
     console.log(`do not move${i++} : ${Math.abs(movement)}`);
   }
 });
 // forEach on maps
-const country = new Map ([
-  ['Nigeria', 'naira'],
-  ['USA','Dollars' ],
-  ['British' , 'pounds']
+const country = new Map([
+  ["Nigeria", "naira"],
+  ["USA", "Dollars"],
+  ["British", "pounds"],
 ]);
-country.forEach(function(value,key,map){
+country.forEach(function (value, key, map) {
   console.log(`${key} ${value}`);
-}) 
-
-// forEach on sets
-const countrySide = new Set(['Nigeria', 'naira' , 'USA','Dollars','British','pounds']);
-countrySide.forEach(function(value,_,Set){
-  console.log(`${value} ${_}`);
 });
 
+// forEach on sets
+const countrySide = new Set([
+  "Nigeria",
+  "naira",
+  "USA",
+  "Dollars",
+  "British",
+  "pounds",
+]);
+countrySide.forEach(function (value, _, Set) {
+  console.log(`${value} ${_}`);
+});
 
 /* 
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
@@ -253,7 +259,7 @@ HINT: Use tools from all lectures in this section so far 😉
 
 TEST DATA 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
-*/ 
+*/
 
 /*const checkDogs = function(dogsJulia,dogsKate) {
   JuliaData.splice(0,5,'dog2','dog3')
@@ -266,26 +272,25 @@ if(dogsJulia => 3) {
 }
 checkDogs();*/
 
-
-const checkDogs = function(dogsJulia,dogsKate) {
+const checkDogs = function (dogsJulia, dogsKate) {
   const juliaDataCorreted = dogsJulia.slice();
-  juliaDataCorreted.splice(0,1);
+  juliaDataCorreted.splice(0, 1);
   juliaDataCorreted.splice(-2);
   console.log(juliaDataCorreted);
 
   const dogs = juliaDataCorreted.concat(dogsKate);
   console.log(dogs);
-  dogs.forEach(function(dogs,i) {
-    if( dogs >= 3 ) {
-      console.log(`Dog number ${i+1} is an adult, and is ${dogs} years old`);
+  dogs.forEach(function (dogs, i) {
+    if (dogs >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dogs} years old`);
     } else {
-      console.log(`"Dog number ${i+1} is still a puppy 🐶"`);
+      console.log(`"Dog number ${i + 1} is still a puppy 🐶"`);
     }
   });
 };
-checkDogs([3, 5, 2, 12, 7],[4, 1, 15, 8, 3,]);
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 
-// using array methods ': maps,filter and reduce 
+// using array methods ': maps,filter and reduce
 // map retuns a new array as a result of all operations on orignal array element
 const account1 = {
   owner: "chizoba Ukaoha",
@@ -313,30 +318,277 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 // filter
 const deposit = movements.filter(function (mov) {
-  return mov > 0 ;
-})
+  return mov > 0;
+});
 console.log(movements);
 console.log(deposit);
 
-const naira = 500 ;
-const UsdTonaira = movements.map(function(mov){
+const naira = 500;
+const UsdTonaira = movements.map(function (mov) {
   return naira * mov;
-})
+});
 console.log(UsdTonaira);
 
-const withdrawal = movements.filter(function(mov){
-  return mov < 0 ;
-})
+const withdrawal = movements.filter(function (mov) {
+  return mov < 0;
+});
 console.log(withdrawal);
- 
+
 console.log(movements);
 
-
-
-// reduce method 
-const balance = movements.reduce(function(accmulator, current) {
+// reduce method
+const balance = movements.reduce(function (accmulator, current) {
   console.log(`iteration ${accmulator}`);
-  
-    return accmulator + current
-},0)
+
+  return accmulator + current;
+}, 0);
 console.log(balance);
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and 
+calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. 
+If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old 
+(which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+const calcAverageHumanAge = function (ages) {
+  const humanAge = ages.map(function (age) {
+    return age <= 2 ? 2 * age : 16 + age * 4;
+  });
+  console.log(humanAge);
+  const adultdogAge = humanAge.filter(function (age) {
+    return age >= 18;
+  });
+  console.log(adultdogAge);
+  const aveHumanAge = adultdogAge.reduce(function (accmulator, age, i, arr) {
+    return accmulator + age / arr.length;
+  }, 0);
+  console.log(aveHumanAge);
+  return aveHumanAge;
+};
+const ave1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const ave2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(ave1, ave2);
+
+// using arrow function
+const calcAverageHumanAge2 = (ages) =>
+  ages
+    .map((age) => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((accumulator, age, i, arr) => accumulator + age / arr.length);
+const ave3 = calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]);
+const ave4 = calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]);
+console.log(ave3, ave4);
+
+const displaySummary = function (movements) {
+  const income = movements
+    .filter(function (mov) {
+      return mov > 0;
+    })
+    .reduce(function (accumulator, mov) {
+      return accumulator + mov;
+    }, 0);
+  console.log(income);
+};
+displaySummary(account1.movements);
+
+// the find method retrieves onl one element of an array that is true to the condition given
+const findMethod = movements.find(function (mov) {
+  return mov < 0;
+});
+console.log(movements);
+console.log(findMethod);
+console.log(accounts);
+
+const account = accounts.find(function (acc) {
+  return acc.owner === "chizoba Ukaoha";
+});
+console.log(account);
+
+// incluedes()check for equlity
+const checkInclude = movements.includes(-130);
+console.log(checkInclude);
+
+//some() checks for a condition
+const checkSome = movements.some((mov) => mov >= 0);
+console.log(checkSome);
+//flat method
+const flatMethod = [[1, 2, 3, 4], [1, 2, 3, 4, 5], 1, 2, 3];
+console.log(flatMethod.flat());
+
+//  A function that returns all the overall balance of all the movements of all the accounts
+const accountMovements = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((accumulator, acc) => accumulator + acc, 0);
+console.log(accountMovements);
+// flatMap() used to go only one level deep
+
+// sorting coverts everthing to string then sorts itself
+// descending and ascending order depending on the condition
+const owners = movements.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  } else {
+    return -1;
+  }
+});
+console.log(owners);
+
+const sumDeposit = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov >= 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(sumDeposit);
+
+const numDeposit1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((count, curr) => (curr >= 1000 ? ++count : count), 0);
+console.log(numDeposit1000);
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const x = new Array(7).fill(1);
+console.log(x);
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// use case of objects in reduce methods
+
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sum, curr) => {
+      sum[curr > 0 ? "deposits" : "withdrawals"] += curr;
+      return sum;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log(deposits, withdrawals);
+
+// A function that capitalizes titleCase
+const capitalizeTitle = function (title) {
+  const exceptions = [
+    "a",
+    "and",
+    "of",
+    "be",
+    "the",
+    "but",
+    "or",
+    "on",
+    "in",
+    "with",
+  ];
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+
+  const titleCase = title
+    .toLowerCase()
+    .split(" ")
+    .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(" ");
+
+  return capitalize(titleCase);
+};
+console.log(capitalizeTitle("This is a nice title"));
+
+/* 
+Julia and Kate are still studying dogs, and this time they are studying if dogs are eating too much or too little.
+Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it to
+ the object as a new property. Do NOT create a new array, simply loop over the array.
+ Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little.
+ HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, 
+ and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is any dog eating EXACTLY the amount of food that is recommended (just true or false)
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+
+TEST DATA:
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+GOOD LUCK 😀
+*/
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
+
+// dogs.forEach((dog) => (dog.recommendedFood = dog.weight ** 0.75 * 28));
+// weight ** 0.75 * 28.
+// console.log(dogs);
+// 1
+const recommendedFood = dogs.forEach(function (dog) {
+  return (dog.recFood = `${Math.trunc(dog.weight ** 0.75 * 28)}`);
+});
+console.log(dogs);
+// 2
+const SahraDog = dogs.find((dog) => dog.owners.includes("Sarah"));
+console.log(SahraDog);
+console.log(
+  `Sarah dog is eating too  ${
+    SahraDog.curFood > SahraDog.recFood ? "much" : "little"
+  }`
+);
+// 3
+const ownerEatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownerEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
+
+console.log(ownersEatTooLittle);
+
+// 4  "Matilda and Alice and Bob's dogs eat too much!"
+console.log(`${ownerEatTooMuch.join(" ,")} dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(" ,")}dogs eat too little!`);
+// 5
+const ExactlyFood = dogs.some((dog) => dog.curFood === dog.recFood);
+console.log(ExactlyFood);
+// 6
+// 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+// current > (recommended * 0.90) && current < (recommended * 1.10)
+const okays = dogs
+  .some(
+    (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+  )
+console.log(okays);
+// 7
+const okayFill = dogs.filter((dog) =>  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+ )
+ console.log(okayFill);
+//  8 
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
+
+
