@@ -578,17 +578,67 @@ console.log(ExactlyFood);
 // 6
 // 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
 // current > (recommended * 0.90) && current < (recommended * 1.10)
-const okays = dogs
-  .some(
-    (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
-  )
+const okays = dogs.some(
+  (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+);
 console.log(okays);
 // 7
-const okayFill = dogs.filter((dog) =>  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
- )
- console.log(okayFill);
-//  8 
+const okayFill = dogs.filter(
+  (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+);
+console.log(okayFill);
+//  8
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
 
+/* working with numbers 
+javaScript uses floating numbers , base 10 i.e 0-9, base 2 ,0-1
+coversion*/
+console.log(Number("23"));
+console.log(+"23");
 
+// parsing a string to a number
+console.log(Number.parseInt("21px", 10));
+console.log(Number.parseFloat("21.4rem"));
+console.log(Number.isNaN("234"));
+console.log(Number.isNaN(234));
+console.log(Number.isNaN(+"234x"));
+console.log(Number.isNaN(23 / 0));
+
+// always use isFinite() to check if a value is a number or not
+console.log(Number.isFinite(20));
+console.log(Number.isFinite("20"));
+console.log(Number.isFinite("20px"));
+console.log(Number.isFinite(20 / 0));
+
+console.log(Number.isInteger(23));
+console.log(Number.isInteger(23.8));
+
+// dealing with Math
+// sqare2 and cubib root
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+// max value and min
+console.log(Math.max(1, 2, 3, 45, 6));
+console.log(Math.max(1, 2, 3, "45", 6)); //supports cohesion does not support parseInt
+console.log(Math.max(1, 2, 3, "45rem", 6));
+console.log(Math.min(1, 2, 3, 45, 6));
+// raduis of a cicle
+console.log(Math.PI * Number.parseFloat("10px") ** 2);
+// ramdom numbers
+console.log(Math.trunc(Math.random() * 6)) + 1;
+const randomInts = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min; //generating random numbers
+console.log(randomInts(10, 20));
+// rounding integer
+console.log(Math.trunc(23.3));
+console.log(Math.floor(23.3)); //same with trunc when dealing with positive numbers but not negative
+console.log(Math.trunc(-23.3));
+console.log(Math.floor(-23.3));
+
+console.log(Math.ceil(23.9));
+console.log(Math.ceil(23.2));
+
+//rounding decimal
+console.log();
