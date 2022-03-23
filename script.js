@@ -297,6 +297,16 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+  movementsDates: [
+    "2019-11-01T13:15:33.035Z",
+    "2019-11-30T09:48:16.867Z",
+    "2019-12-25T06:04:23.907Z",
+    "2020-01-25T14:18:46.235Z",
+    "2020-02-05T16:33:06.386Z",
+    "2020-04-10T14:43:26.374Z",
+    "2020-06-25T18:49:59.371Z",
+    "2020-07-26T12:01:20.894Z",
+  ],
 };
 const account2 = {
   owner: "Stanly Ibe",
@@ -592,7 +602,7 @@ const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
 
 /* working with numbers 
-javaScript uses floating numbers , base 10 i.e 0-9, base 2 ,0-1
+javaScript uses floating numbers , base 10 i.e 0-9, base 2 ,0-1 , 64bit for storage 
 coversion*/
 console.log(Number("23"));
 console.log(+"23");
@@ -641,4 +651,137 @@ console.log(Math.ceil(23.9));
 console.log(Math.ceil(23.2));
 
 //rounding decimal
-console.log();
+console.log(+(2.8).toFixed(2));
+// remainder operator
+console.log(8 % 3);
+// to check even number
+console.log(6 % 2);
+const isEven = function (n) {
+  return n % 2 === 0;
+};
+console.log(isEven(8));
+console.log(isEven(7));
+
+// numeric seprators
+const diameter = 287_460_000_000;
+console.log(diameter);
+const fee = 15_00;
+console.log(fee);
+
+const fees = 1_500;
+console.log(fees);
+
+const ok = +"15_000";
+console.log(ok);
+
+// working with BigInt
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+//using BigInt you can use any amount of number you want but you cant use bigint with other numbers
+console.log(4445896808776655543332244555666666n);
+const huge = 4445896808776655543332244555666666n;
+const num = 345;
+// console.log(huge + num);
+console.log(20n === 20);
+
+// Dates and time
+// create a date
+const now = new Date();
+console.log(now);
+// parsing through string
+console.log(new Date("2022-03-05T22:26:13.007Z"));
+console.log(new Date("March 5, 2022"));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(0)); //unix time
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+const futures = new Date(2037, 10, 19, 15, 23);
+console.log(futures);
+console.log(futures.getFullYear());
+console.log(futures.getMonth());
+console.log(futures.getDate());
+console.log(futures.getDay());
+console.log(futures.getHours());
+console.log(futures.getMinutes());
+console.log(futures.getSeconds());
+console.log(futures.getMilliseconds());
+console.log(futures.toISOString());
+console.log(futures.getTime());
+
+// current time stamp
+console.log(Date.now());
+futures.setFullYear(2050);
+console.log(futures);
+
+const calcDaysPassed = (date1, date2) =>
+  Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
+
+const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+console.log(days1);
+
+// set time out
+const ingridiantes = ["olive", "spinach"];
+const pizzer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  5000, 
+  ...ingridiantes
+);
+console.log("waiting");
+if(ingridiantes.includes('olive')) clearTimeout(pizzer);
+
+
+setInterval(() => {
+  const now = new Date();
+  console.log(now);
+}, 3000);
+
+// Advanced DOM Manipulation 
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+console.log(document.querySelector('.header'));
+console.log(document.getElementById());
+console.log(document.getElementsByClassName);
+console.log(document.getElementsByTagName);
+console.log(document.createElement);
+
+
+// scrolling an object
+  /*window.scrollTo(s1coords.left  + window.pageXOffset, s1coords.top + window.pageYOffset)
+  window.scrollTo({
+    left: s1coords + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth'*/
+
+// types of events and event handlers
+// check mdn javascript events
+// Event propagation : Bubbling and capturing
+
+/* intersection observer API 
+ allows our code to basically observe changes to the way that a certain target element intersects another element or
+ the way it intersects the view port*/ 
+
+//  const observer =  new IntersectionObserver();
+//  observer.observe(features)
+
+
+// Dom Life cycle : right from the momment a page is accessesd untill the user leaves the page 
+// DomContentLoaded :fired as soon as the html is completely parsed to the Dom tree 
+
+document.addEventListener('DOMContentedLoaded',function(e) {
+  console.log('HTML PARSED AND DOM TREE BUILT', e);
+})
+// load is parsed as soon as the complete message loads
+window.addEventListener('click', function(e) {
+  console.log('page fully loaded', e);
+})
+// Before unload created as soon as a user wants to leave the site 
+window.addEventListener('beforeunload', function(e){
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
+
+
